@@ -1,0 +1,12 @@
+{
+  "name": "launchdeck-api",
+  "version": "0.1.0",
+  "description": "A TypeScript API for launch updates.",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  }
+}

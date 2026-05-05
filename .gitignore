@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+repo-doctor-report.md
+repo-doctor-report.json
+
+buildspec.md
+readme-upgrade-prompt.md
+codex-prompts.md
