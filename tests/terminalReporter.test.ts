@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { formatTerminalReport } from "../src/reporters/terminalReporter";
-import type { ScanResult } from "../src/scanner/types";
+import { formatTerminalReport } from "../src/reporters/terminalReporter.js";
+import type { ScanResult } from "../src/scanner/types.js";
 
 function stripAnsi(value: string): string {
   return value.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "");
@@ -15,9 +15,8 @@ describe("formatTerminalReport", () => {
       detectedStacks: [
         {
           name: "node",
-          primary: true,
           confidence: "high",
-          signals: ["package.json"]
+          indicators: ["package.json"]
         }
       ],
       primaryStack: "node",
@@ -73,13 +72,27 @@ describe("formatTerminalReport", () => {
     const output = stripAnsi(formatTerminalReport(result));
 
     expect(output).toContain("Repo Doctor AI");
+    expect(output).toContain("Repository: example");
     expect(output).toContain("Score:");
+    expect(output).toContain("72/100");
     expect(output).toContain("node (primary)");
+
     expect(output).toContain("[pass] 3 passed");
     expect(output).toContain("[warn] 1 warnings");
     expect(output).toContain("[fail] 2 failed");
     expect(output).toContain("Critical: 1");
+
+    expect(output).toContain("Category Scores");
+    expect(output).toContain("Presentation");
+    expect(output).toContain("Build/Test Readiness");
+    expect(output).toContain("CI/CD Health");
+    expect(output).toContain("Security Hygiene");
+    expect(output).toContain("Contributor Readiness");
+
+    expect(output).toContain("Recommended Fixes");
     expect(output).toContain("Add a clear README with installation and usage instructions.");
+
+    expect(output).toContain("Notable Findings");
     expect(output).toContain("README.md is missing.");
     expect(output).toContain("Tests are incomplete.");
   });
